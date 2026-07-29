@@ -1,26 +1,242 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Zenith primitives — imagine-design-system.vercel.app
+   Palettes verbatim from /colors; radii + borders from /tokens.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-primary-10: #f6f2ff;
+  --color-primary-20: #e8daff;
+  --color-primary-30: #d4bbff;
+  --color-primary-40: #be95ff;
+  --color-primary-50: #a56eff;
+  --color-primary-60: #8a3ffc;
+  --color-primary-70: #6929c4;
+  --color-primary-80: #491d8b;
+  --color-primary-90: #31135e;
+  --color-primary-100: #1c0f30;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-10: #f4f4f4;
+  --color-neutral-20: #eaeaea;
+  --color-neutral-30: #dbdbdb;
+  --color-neutral-40: #c6c6c6;
+  --color-neutral-50: #8d8d8d;
+  --color-neutral-60: #6f6f6f;
+  --color-neutral-70: #525252;
+  --color-neutral-80: #393939;
+  --color-neutral-90: #262626;
+  --color-neutral-100: #000000;
+
+  --color-error-10: #fff1f1;
+  --color-error-40: #ff8389;
+  --color-error-50: #fa4d56;
+  --color-error-60: #da1e28;
+  --color-error-90: #520408;
+
+  --color-success-10: #defbe6;
+  --color-success-40: #42be65;
+  --color-success-50: #24a148;
+  --color-success-60: #198038;
+  --color-success-90: #022d0d;
+
+  --color-warning-10: #fcf4d6;
+  --color-warning-30: #f1c21b;
+  --color-warning-40: #d2a106;
+  --color-warning-50: #b28600;
+  --color-warning-90: #302400;
+
+  /* Zenith radius scale (rounded-1 … rounded-12) */
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-3: 6px;
+  --radius-4: 8px;
+  --radius-5: 10px;
+  --radius-6: 12px;
+  --radius-7: 14px;
+  --radius-8: 16px;
+  --radius-9: 18px;
+  --radius-10: 20px;
+  --radius-11: 24px;
+  --radius-12: 32px;
+
+  /* Zenith type scale — Google Sans Flex */
+  --text-body-xs: 12px;
+  --text-body-xs--line-height: 16px;
+  --text-body-xs--letter-spacing: 0.24px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--letter-spacing: 0.28px;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--letter-spacing: 0.16px;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--letter-spacing: 0.18px;
+  --text-label-xs: 11px;
+  --text-label-xs--line-height: 16px;
+  --text-label-xs--letter-spacing: 0.33px;
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.36px;
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--letter-spacing: 0.42px;
+  --text-label-lg: 16px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0.32px;
+  --text-heading-xs: 20px;
+  --text-heading-xs--line-height: 24px;
+  --text-heading-xs--letter-spacing: 0.2px;
+  --text-heading-sm: 24px;
+  --text-heading-sm--line-height: 32px;
+  --text-heading-sm--letter-spacing: 0.24px;
+  --text-heading-md: 28px;
+  --text-heading-md--line-height: 36px;
+  --text-heading-md--letter-spacing: 0.28px;
+  --text-heading-lg: 32px;
+  --text-heading-lg--line-height: 40px;
+  --text-heading-lg--letter-spacing: 0.32px;
+  --text-display-xs: 48px;
+  --text-display-xs--line-height: 56px;
+  --text-display-xs--letter-spacing: -0.48px;
+
+  --font-sans: var(--font-gsf), system-ui, -apple-system, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Semantic tokens — surface values match the Chatly/Computer Figma screens
+   (light product); accent swapped from Chatly blue to Zenith purple.
+--------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --surface-page: #ffffff;
+  --surface-canvas: #f7f7f7;
+  --surface-raised: #ffffff;
+  --fill-secondary: #ededed;
+  --fill-chip: #f5f5f5;
+  --fill-inverse: #0f0f0f;
+  --content-primary: #0f0f0f;
+  --content-secondary: #525252;
+  --content-tertiary: rgba(15, 15, 15, 0.5);
+  --content-accent: var(--color-primary-70);
+  --content-on-fill: #ffffff;
+  --border-subtle: #ededed;
+  --border-default: #e0e0e0;
+  --fill-primary: var(--color-primary-60);
+  --accent-tint: rgba(138, 63, 252, 0.12);
+  --status-success: var(--color-success-60);
+  --status-success-surface: var(--color-success-10);
+  --status-warning: var(--color-warning-50);
+  --status-warning-surface: var(--color-warning-10);
+  --status-error: var(--color-error-60);
+  --status-error-surface: var(--color-error-10);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface-page);
+  --color-canvas: var(--surface-canvas);
+  --color-raised: var(--surface-raised);
+  --color-fill-secondary: var(--fill-secondary);
+  --color-chip: var(--fill-chip);
+  --color-inverse: var(--fill-inverse);
+  --color-content: var(--content-primary);
+  --color-content-secondary: var(--content-secondary);
+  --color-content-tertiary: var(--content-tertiary);
+  --color-accent: var(--content-accent);
+  --color-accent-tint: var(--accent-tint);
+  --color-on-fill: var(--content-on-fill);
+  --color-subtle: var(--border-subtle);
+  --color-default: var(--border-default);
+  --color-fill: var(--fill-primary);
+  --color-ok: var(--status-success);
+  --color-ok-surface: var(--status-success-surface);
+  --color-warn: var(--status-warning);
+  --color-warn-surface: var(--status-warning-surface);
+  --color-danger: var(--status-error);
+  --color-danger-surface: var(--status-error-surface);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Chatly shadow set — literal values so shadow-* utilities resolve statically */
+@theme {
+  --shadow-xs: 0 2px 2px rgba(176, 175, 175, 0.16);
+  --shadow-toolbar: 0 2px 14px rgba(176, 175, 175, 0.32);
+  --shadow-window: 0 0 12px rgba(176, 175, 175, 0.25);
+  --shadow-dock: 0 8px 16px rgba(0, 0, 0, 0.22);
+}
+
+/* Liquid glass — light widgets over wallpaper.
+   Uniform fill + blur/saturate/brightness lift (not a gradient — gradients
+   over dark wallpapers go muddy), hairline refractive rim, inset top light. */
+.lg {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.15);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 4px 16px rgba(23, 26, 29, 0.1);
+}
+
+/* Liquid glass — dark panels (modals) */
+.lg-dark {
+  background: rgba(24, 24, 28, 0.52);
+  -webkit-backdrop-filter: blur(36px) saturate(160%);
+  backdrop-filter: blur(36px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* Silvery custom cursor inside the computer — customizability on display */
+.desktop-cursor,
+.desktop-cursor * {
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%23ffffff"/><stop offset="0.45" stop-color="%23d9dde3"/><stop offset="0.75" stop-color="%23a8aeb8"/><stop offset="1" stop-color="%23868d99"/></linearGradient></defs><path d="M5 2 L5 19 L9.6 15.2 L12.4 21.4 L15.2 20.1 L12.4 14 L18 13.4 Z" fill="url(%23s)" stroke="%232e333b" stroke-width="1.2" stroke-linejoin="round"/></svg>')
+      5 2,
+    auto;
+}
+
+/* Interactive elements keep a real pointer inside the computer */
+.desktop-cursor button,
+.desktop-cursor a,
+.desktop-cursor [role="button"],
+.desktop-cursor input,
+.desktop-cursor label,
+.desktop-cursor select {
+  cursor: pointer;
+}
+.desktop-cursor input[type="text"],
+.desktop-cursor input:not([type]) {
+  cursor: text;
+}
+
+/* Warmwind-style glossy dark CTA pill */
+.gloss {
+  background-image: linear-gradient(180deg, #2e3134, #1a1d20);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.2),
+    0 1px 2px -0.5px rgba(23, 26, 29, 0.1);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-page);
+  color: var(--content-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--fill-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

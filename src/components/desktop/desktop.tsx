@@ -33,6 +33,7 @@ import {
 } from "@/lib/workers";
 import { connectors, connectorById } from "@/lib/data";
 import { AppWindow } from "./app-windows";
+import { Welcome } from "./welcome";
 
 function TaskIcon({ status, dark = true }: { status: WorkerTask["status"]; dark?: boolean }) {
   if (status === "done")
@@ -196,6 +197,8 @@ export function DesktopExperience() {
         backgroundPosition: "center",
       }}
     >
+      <Welcome wallpaper={wallpaperOverride ?? worker.wallpaper} />
+
       {/* ---- top app dock: open apps · library · overview ---- */}
       <div className="absolute inset-x-0 top-3 z-30 flex justify-center">
         <div className="lg flex items-center gap-1.5 rounded-full p-1.5">

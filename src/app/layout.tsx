@@ -9,6 +9,13 @@ const googleSansFlex = localFont({
   display: "swap",
 });
 
+const sacramento = localFont({
+  src: "../fonts/Sacramento-latin.woff2",
+  weight: "400",
+  variable: "--font-script",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Imagine Computer",
   description: "Your tools, run for you — Imagine Computer POC",
@@ -20,7 +27,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${googleSansFlex.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${googleSansFlex.variable} ${sacramento.variable} h-full antialiased`}
+    >
       <body className="min-h-full">{children}</body>
     </html>
   );

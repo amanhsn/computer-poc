@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" fill="none">
+  <!-- Imagine mark: sparkle over an S-ribbon, knocked out of the squircle -->
+  <path d="M600 150 Q672 470 950 600 Q672 730 600 1050 Q528 730 250 600 Q528 470 600 150Z" fill="currentColor"/>
+  <path d="M1195 300 Q1000 250 872 214 Q862 300 878 372 Q1010 420 1195 470 Q1200 380 1195 300Z" fill="currentColor"/>
+  <path d="M5 900 Q200 950 328 986 Q338 900 322 828 Q190 780 5 730 Q0 820 5 900Z" fill="currentColor"/>
+</svg>

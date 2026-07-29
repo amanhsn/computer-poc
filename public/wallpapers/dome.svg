@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1600" viewBox="0 0 2560 1600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a1508"/>
+      <stop offset="100%" stop-color="#160a04"/>
+    </linearGradient>
+    <radialGradient id="g0" cx="30%" cy="72%" r="78%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#f59e0b" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient><radialGradient id="g1" cx="66%" cy="32%" r="58%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.7"/>
+      <stop offset="55%" stop-color="#fb923c" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient><radialGradient id="g2" cx="86%" cy="78%" r="52%">
+      <stop offset="0%" stop-color="#dc2626" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#dc2626" stop-opacity="0.23"/>
+      <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+    </radialGradient><radialGradient id="g3" cx="14%" cy="26%" r="50%">
+      <stop offset="0%" stop-color="#fcd34d" stop-opacity="0.4"/>
+      <stop offset="55%" stop-color="#fcd34d" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fcd34d" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="2560" height="1600" fill="url(#base)"/>
+  <g filter="url(#soft)"><rect width="2560" height="1600" fill="url(#g0)"/><rect width="2560" height="1600" fill="url(#g1)"/><rect width="2560" height="1600" fill="url(#g2)"/><rect width="2560" height="1600" fill="url(#g3)"/></g>
+</svg>

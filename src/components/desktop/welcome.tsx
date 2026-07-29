@@ -225,36 +225,25 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
 /* ---------- the Imagine mark, set in a glass plate ---------- */
 function GlassMark() {
   return (
-    /* the published mark is circle-masked, so the glass lens is circular too —
-       concentric rather than a circle inside a squircle */
-    <span
-      className="relative flex items-center justify-center rounded-full p-[20px]"
-      style={{
-        background: "rgba(255,255,255,0.13)",
-        WebkitBackdropFilter: "blur(30px) saturate(180%)",
-        backdropFilter: "blur(30px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.4)",
-        boxShadow:
-          "inset 0 1.5px 0 rgba(255,255,255,0.6), inset 0 -1.5px 0 rgba(255,255,255,0.14), 0 30px 70px rgba(0,0,0,0.42)",
-      }}
-    >
-      {/* specular arc across the lens */}
+    /* the mark as cast glass — background removed, so it floats */
+    <span className="relative block">
+      {/* halo so the glass catches light off the dark ground */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-full"
+        className="pointer-events-none absolute -inset-20 rounded-full"
         style={{
           background:
-            "linear-gradient(145deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.06) 34%, transparent 55%)",
+            "radial-gradient(circle, rgba(150,190,240,0.22) 0%, rgba(150,190,240,0.07) 46%, transparent 72%)",
         }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/imagine-logo.png"
+        src="/imagine-glass.png"
         alt="Imagine"
-        width={104}
-        height={104}
-        className="relative block h-[104px] w-[104px] rounded-full"
-        style={{ boxShadow: "0 12px 32px rgba(20,10,50,0.5)" }}
+        width={288}
+        height={288}
+        className="relative block h-[288px] w-[288px] object-contain"
+        style={{ filter: "drop-shadow(0 26px 54px rgba(0,0,0,0.55))" }}
       />
     </span>
   );

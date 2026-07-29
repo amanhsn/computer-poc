@@ -64,6 +64,20 @@ function Avatar({ w, size, ring = false }: { w: WorkerAgent; size: number; ring?
 
 const GOOGLE_APPS = ["google-docs", "google-sheets", "google-slides", "gmail", "drive", "google-calendar"];
 
+/* wallpaper library — Tahoe-family abstracts, plus the originals */
+const WALLPAPERS = [
+  { src: "/wallpapers/iridescence.svg", label: "Iridescence" },
+  { src: "/wallpapers/motion-blue.svg", label: "Motion Blue" },
+  { src: "/wallpapers/motion-purple.svg", label: "Motion Purple" },
+  { src: "/wallpapers/dome.svg", label: "Dome" },
+  { src: "/wallpapers/valley.svg", label: "Valley" },
+  { src: "/wallpapers/grid-magenta.svg", label: "Grid Magenta" },
+  { src: "/wallpaper-hero.jpg", label: "Hills" },
+  { src: "/wallpaper.svg", label: "Bloom" },
+  { src: "/wallpaper-dawn.svg", label: "Dawn" },
+  { src: "/wallpaper-dusk.svg", label: "Dusk" },
+];
+
 export function DesktopExperience() {
   const [workerId, setWorkerId] = useState(workers[0].id);
   const worker = workers.find((w) => w.id === workerId)!;
@@ -409,16 +423,16 @@ export function DesktopExperience() {
                 </span>
               </div>
 
-              {/* background picker */}
+              {/* wallpaper library */}
               <div className="col-span-2 rounded-8 bg-white/55 p-3 shadow-xs">
-                <p className="mb-2 text-label-sm font-medium text-content">Background</p>
-                <div className="flex items-center gap-2">
-                  {[
-                    { src: "/wallpaper-hero.jpg", label: "Hills" },
-                    { src: "/wallpaper.svg", label: "Bloom" },
-                    { src: "/wallpaper-dawn.svg", label: "Dawn" },
-                    { src: "/wallpaper-dusk.svg", label: "Dusk" },
-                  ].map((bg) => {
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-label-sm font-medium text-content">Wallpaper</p>
+                  <span className="text-label-xs text-content-tertiary">
+                    {WALLPAPERS.length} in library
+                  </span>
+                </div>
+                <div className="grid grid-cols-5 gap-1.5">
+                  {WALLPAPERS.map((bg) => {
                     const active = (wallpaperOverride ?? worker.wallpaper) === bg.src;
                     return (
                       <button
@@ -427,8 +441,8 @@ export function DesktopExperience() {
                         title={bg.label}
                         aria-pressed={active}
                         onClick={() => setWallpaperOverride(bg.src)}
-                        className={`h-10 flex-1 rounded-5 bg-cover bg-center shadow-xs transition-transform hover:scale-105 ${
-                          active ? "ring-2 ring-accent/60" : "ring-1 ring-white/60"
+                        className={`aspect-[16/10] rounded-4 bg-cover bg-center shadow-xs transition-transform hover:scale-105 ${
+                          active ? "ring-2 ring-accent/70" : "ring-1 ring-white/60"
                         }`}
                         style={{ backgroundImage: `url(${bg.src})` }}
                       />

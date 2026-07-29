@@ -20,6 +20,8 @@ import {
   SkipForward,
   ListTodo,
   ChevronRight,
+  Trash2,
+  Pin,
   Zap,
   CreditCard,
 } from "lucide-react";
@@ -81,6 +83,7 @@ export function DesktopExperience() {
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [controlOpen, setControlOpen] = useState(false);
   const [railHidden, setRailHidden] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [model, setModel] = useState<"Flash" | "Pro" | "Ultra">("Ultra");
   const [wallpaperOverride, setWallpaperOverride] = useState<string | null>(null);
   const [clock, setClock] = useState("");
@@ -112,6 +115,7 @@ export function DesktopExperience() {
         setOverview(false);
         setLibraryOpen(false);
         setControlOpen(false);
+        setHistoryOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -129,6 +133,7 @@ export function DesktopExperience() {
     setWorkersOpen(false);
     setChatOpen(false);
     setLibraryOpen(false);
+    setHistoryOpen(false);
   };
 
   const openApp = (connectorId: string) => {
@@ -436,52 +441,79 @@ export function DesktopExperience() {
         </>
       )}
 
-      {/* ---- workflow rail (right), swipe right or toggle above to hide ---- */}
+      {/* ---- worklist (right): teaching-mode steps with hints ---- */}
       <div
         onWheel={(e) => {
           if (e.deltaX > 40) setRailHidden(true);
         }}
-        className={`absolute bottom-24 right-4 top-16 z-[35] flex w-60 flex-col gap-2 overflow-y-auto transition-all duration-300 ${
+        className={`absolute bottom-24 right-4 top-16 z-[35] flex w-[248px] flex-col transition-all duration-300 ${
           overview || railHidden ? "pointer-events-none translate-x-12 opacity-0" : ""
         }`}
       >
-        <div className="lg rounded-6 p-3">
-          <div className="flex items-start justify-between">
-            <p className="text-label-xs font-medium uppercase tracking-wide text-content-tertiary">
-              Workflow
-            </p>
-            <button
-              type="button"
-              aria-label="Hide workflow panel"
-              onClick={() => setRailHidden(true)}
-              className="-mr-1 -mt-1 flex h-6 w-6 items-center justify-center rounded-full hover:bg-white/70"
-            >
-              <ChevronRight size={14} strokeWidth={1.8} className="text-content-secondary" />
-            </button>
-          </div>
-          <p className="mt-0.5 text-body-sm font-medium text-content">{worker.routine}</p>
-          <p className="text-label-xs text-content-tertiary">
-            {doneCount}/{worker.tasks.length} steps done
-          </p>
-        </div>
-        {worker.tasks.map((t, i) => (
-          <div
-            key={t.title}
-            className={`lg rounded-6 p-3 ${
-              t.status === "running" ? "ring-2 ring-accent/50" : ""
-            }`}
+        {/* header */}
+        <div className="flex shrink-0 items-center justify-between pb-1.5">
+          <button
+            type="button"
+            aria-label="Hide worklist"
+            onClick={() => setRailHidden(true)}
+            className="lg flex h-7 w-7 items-center justify-center rounded-full"
           >
-            <div className="flex items-center gap-2">
-              <TaskIcon status={t.status} dark={false} />
-              <span className="min-w-0 flex-1 truncate text-label-sm font-medium text-content">
-                {i + 1}. {t.title}
-              </span>
-            </div>
-            <p className="mt-1 pl-6 text-label-xs leading-4 text-content-tertiary">
-              {t.detail}
+            <ChevronRight size={14} strokeWidth={1.8} className="text-content-secondary" />
+          </button>
+          <button
+            type="button"
+            className="lg flex h-7 items-center gap-1.5 rounded-full px-2.5 text-label-xs font-medium text-content"
+          >
+            <Trash2 size={12} strokeWidth={1.8} />
+            Reset Worklist
+          </button>
+        </div>
+
+        <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto pb-1 pr-0.5">
+          {/* general hints */}
+          <div className="lg shrink-0 rounded-5 px-2.5 py-2">
+            <p className="text-label-xs font-semibold text-content">General hints:</p>
+            <p className="mt-0.5 text-[10px] leading-[14px] text-content-secondary">
+              {worker.role_hint}
             </p>
           </div>
-        ))}
+
+          {/* steps */}
+          {worker.tasks.map((t, i) => (
+            <div
+              key={t.title}
+              className={`lg shrink-0 rounded-5 px-2.5 py-2 ${
+                t.status === "running" ? "ring-[1.5px] ring-accent/55" : ""
+              }`}
+            >
+              <div className="flex items-start gap-1.5">
+                <span className="mt-[1px] shrink-0">
+                  <TaskIcon status={t.status} dark={false} />
+                </span>
+                <span
+                  className={`min-w-0 flex-1 text-label-xs font-semibold leading-[15px] ${
+                    t.status === "queued" ? "text-content-secondary" : "text-content"
+                  }`}
+                >
+                  {i + 1}. {t.title}
+                </span>
+                <Pin size={11} strokeWidth={1.8} className="mt-[2px] shrink-0 text-content-tertiary" />
+              </div>
+              {t.hints?.length ? (
+                <ul className="mt-1 flex flex-col gap-[3px] pl-[22px]">
+                  {t.hints.map((h) => (
+                    <li
+                      key={h}
+                      className="relative text-[10px] leading-[14px] text-content-secondary before:absolute before:-left-2 before:top-[5px] before:h-[3px] before:w-[3px] before:rounded-full before:bg-current before:opacity-60"
+                    >
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ---- window stage ---- */}
@@ -603,13 +635,73 @@ export function DesktopExperience() {
             {worker.name}&apos;s workspace
           </span>
         </span>
-        <button
-          type="button"
-          className="lg flex h-9 items-center gap-1.5 rounded-full px-3"
-        >
-          <History size={14} strokeWidth={1.8} className="text-content-secondary" />
-          <span className="text-label-sm font-medium text-content">History</span>
-        </button>
+        <div className="relative">
+          <button
+            type="button"
+            aria-expanded={historyOpen}
+            onClick={() => setHistoryOpen((o) => !o)}
+            className={`lg flex h-9 items-center gap-1.5 rounded-full px-3 ${
+              historyOpen ? "!bg-white/90" : ""
+            }`}
+          >
+            <History size={14} strokeWidth={1.8} className="text-content-secondary" />
+            <span className="text-label-sm font-medium text-content">History</span>
+          </button>
+
+          {historyOpen && (
+            <>
+              <button
+                type="button"
+                aria-label="Close history"
+                className="fixed inset-0 z-[38] cursor-default"
+                onClick={() => setHistoryOpen(false)}
+              />
+              <div className="lg absolute bottom-11 left-0 z-[39] w-80 rounded-8 p-3">
+                <div className="flex items-center gap-2 pb-2">
+                  <Avatar w={worker} size={22} />
+                  <span className="text-label-sm font-medium text-content">
+                    {worker.name}&apos;s recent work
+                  </span>
+                  <span className="ml-auto text-label-xs text-content-tertiary">
+                    {worker.history.length} tasks
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  {worker.history.map((h, i) => {
+                    const c = connectorById(h.connectorId);
+                    return (
+                      <div
+                        key={h.title}
+                        className={`flex items-center gap-2.5 py-2 ${
+                          i > 0 ? "border-t border-white/40" : ""
+                        }`}
+                      >
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/70">
+                          <img src={c.icon} alt="" width={15} height={15} />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-label-sm text-content">
+                            {h.title}
+                          </span>
+                          <span className="block text-label-xs text-content-tertiary">
+                            {c.name} · {h.when}
+                          </span>
+                        </span>
+                        <Check size={13} strokeWidth={2.5} className="shrink-0 text-ok" />
+                      </div>
+                    );
+                  })}
+                </div>
+                <button
+                  type="button"
+                  className="mt-1 w-full rounded-5 bg-white/60 py-1.5 text-label-xs font-medium text-content"
+                >
+                  View all activity
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* prompt pill */}

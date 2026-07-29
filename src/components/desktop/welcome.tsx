@@ -76,7 +76,7 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
 
   return (
     <div
-      className="fixed inset-0 z-[200] overflow-hidden"
+      className="absolute inset-0 z-[100] overflow-hidden"
       style={{
         opacity: leaving ? 0 : 1,
         transform: leaving ? "scale(1.06)" : "scale(1)",
@@ -286,7 +286,10 @@ function Handwriting({ active }: { active: boolean }) {
           className="select-none whitespace-nowrap text-[clamp(76px,10.5vw,150px)] leading-[1.15] text-white"
           style={{
             fontFamily: "var(--font-script)",
-            textShadow: "0 3px 30px rgba(0,0,0,0.35)",
+            /* thicken the monoline to Apple's greeting weight */
+            WebkitTextStroke: "4px #fff",
+            paintOrder: "stroke fill",
+            filter: "drop-shadow(0 3px 26px rgba(0,0,0,0.4))",
           }}
         >
           Welcome

@@ -225,34 +225,36 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
 /* ---------- the Imagine mark, set in a glass plate ---------- */
 function GlassMark() {
   return (
+    /* the published mark is circle-masked, so the glass lens is circular too —
+       concentric rather than a circle inside a squircle */
     <span
-      className="relative flex items-center justify-center rounded-[36px] p-[18px]"
+      className="relative flex items-center justify-center rounded-full p-[20px]"
       style={{
-        background: "rgba(255,255,255,0.15)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.42)",
+        background: "rgba(255,255,255,0.13)",
+        WebkitBackdropFilter: "blur(30px) saturate(180%)",
+        backdropFilter: "blur(30px) saturate(180%)",
+        border: "1px solid rgba(255,255,255,0.4)",
         boxShadow:
-          "inset 0 1.5px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(255,255,255,0.12), 0 28px 64px rgba(0,0,0,0.4)",
+          "inset 0 1.5px 0 rgba(255,255,255,0.6), inset 0 -1.5px 0 rgba(255,255,255,0.14), 0 30px 70px rgba(0,0,0,0.42)",
       }}
     >
-      {/* specular sweep across the plate */}
+      {/* specular arc across the lens */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[36px]"
+        className="pointer-events-none absolute inset-0 rounded-full"
         style={{
           background:
-            "linear-gradient(140deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.07) 36%, transparent 58%)",
+            "linear-gradient(145deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.06) 34%, transparent 55%)",
         }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/imagine-logo.png"
         alt="Imagine"
-        width={90}
-        height={90}
-        className="relative block h-[90px] w-[90px] rounded-[20px]"
-        style={{ boxShadow: "0 10px 28px rgba(20,10,50,0.45)" }}
+        width={104}
+        height={104}
+        className="relative block h-[104px] w-[104px] rounded-full"
+        style={{ boxShadow: "0 12px 32px rgba(20,10,50,0.5)" }}
       />
     </span>
   );

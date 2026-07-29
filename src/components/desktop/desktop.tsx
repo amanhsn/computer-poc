@@ -441,7 +441,7 @@ export function DesktopExperience() {
         onWheel={(e) => {
           if (e.deltaX > 40) setRailHidden(true);
         }}
-        className={`absolute bottom-24 right-4 top-16 z-20 flex w-60 flex-col gap-2 overflow-y-auto transition-all duration-300 ${
+        className={`absolute bottom-24 right-4 top-16 z-[35] flex w-60 flex-col gap-2 overflow-y-auto transition-all duration-300 ${
           overview || railHidden ? "pointer-events-none translate-x-12 opacity-0" : ""
         }`}
       >

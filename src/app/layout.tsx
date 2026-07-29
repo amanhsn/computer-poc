@@ -9,8 +9,8 @@ const googleSansFlex = localFont({
   display: "swap",
 });
 
-const sacramento = localFont({
-  src: "../fonts/Sacramento-latin.woff2",
+const momoSignature = localFont({
+  src: "../fonts/MomoSignature-latin.woff2",
   weight: "400",
   variable: "--font-script",
   display: "swap",
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${googleSansFlex.variable} ${sacramento.variable} h-full antialiased`}
+      className={`${googleSansFlex.variable} ${momoSignature.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

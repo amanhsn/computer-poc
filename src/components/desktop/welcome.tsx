@@ -93,18 +93,19 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
           backgroundImage: `url(${wallpaper})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(56px) saturate(1.3) brightness(0.95)",
+          filter: "blur(22px) saturate(0.6) brightness(1.02)",
         }}
       />
-      <div aria-hidden className="absolute inset-0 bg-black/25" />
+      {/* neutral scrim keeps the greeting legible without the green cast */}
+      <div aria-hidden className="absolute inset-0 bg-[#1b1d20]/45" />
       <div
         aria-hidden
         className="absolute inset-0"
-        style={{ background: "radial-gradient(65% 60% at 50% 45%, transparent, rgba(0,0,0,0.35))" }}
+        style={{ background: "radial-gradient(70% 65% at 50% 45%, transparent, rgba(20,22,25,0.35))" }}
       />
 
       {/* stage */}
-      <div className="relative flex h-full flex-col items-center justify-center">
+      <div className="relative flex h-full flex-col items-center justify-center px-10">
         {/* Beat 1 — glass Imagine mark */}
         <div
           className="absolute"
@@ -283,12 +284,10 @@ function Handwriting({ active }: { active: boolean }) {
         }}
       >
         <p
-          className="select-none whitespace-nowrap text-[clamp(76px,10.5vw,150px)] leading-[1.15] text-white"
+          className="select-none whitespace-nowrap text-[clamp(64px,8vw,124px)] leading-[1.35] text-white"
           style={{
             fontFamily: "var(--font-script)",
-            /* thicken the monoline to Apple's greeting weight */
-            WebkitTextStroke: "4px #fff",
-            paintOrder: "stroke fill",
+            padding: "0 0.14em",
             filter: "drop-shadow(0 3px 26px rgba(0,0,0,0.4))",
           }}
         >

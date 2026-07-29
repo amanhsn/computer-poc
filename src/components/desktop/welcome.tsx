@@ -225,27 +225,15 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
 /* ---------- the Imagine mark, set in a glass plate ---------- */
 function GlassMark() {
   return (
-    /* the mark as cast glass — background removed, so it floats */
-    <span className="relative block">
-      {/* halo so the glass catches light off the dark ground */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -inset-20 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(150,190,240,0.22) 0%, rgba(150,190,240,0.07) 46%, transparent 72%)",
-        }}
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/imagine-glass.png"
-        alt="Imagine"
-        width={288}
-        height={288}
-        className="relative block h-[288px] w-[288px] object-contain"
-        style={{ filter: "drop-shadow(0 26px 54px rgba(0,0,0,0.55))" }}
-      />
-    </span>
+    /* the mark as cast glass — no plate, no bloom, just the glass */
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src="/imagine-glass.png"
+      alt="Imagine"
+      width={288}
+      height={288}
+      className="block h-[288px] w-[288px] object-contain"
+    />
   );
 }
 

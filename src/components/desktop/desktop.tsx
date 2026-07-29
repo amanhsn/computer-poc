@@ -890,30 +890,18 @@ export function DesktopExperience() {
         </div>
       )}
 
-      {/* ---- centered chat popup ---- */}
+      {/* ---- chat: rises from the prompt, avatar straddling its top edge ---- */}
       {chatOpen && (
-        <div
-          className="absolute inset-0 z-40 flex items-center justify-center"
-          onClick={() => setChatOpen(false)}
-        >
-          <div
-            className="flex h-[560px] w-[480px] max-w-[92%] flex-col rounded-11 bg-raised p-3 shadow-window"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* agent front and center at the top of the expanded chat */}
-            <div className="relative flex flex-col items-center pb-3 pt-2">
-              <GripHorizontal
-                size={16}
-                className="absolute left-1 top-2 text-content-tertiary"
-              />
-              <button
-                type="button"
-                aria-label="Close chat"
-                onClick={() => setChatOpen(false)}
-                className="absolute right-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-fill-secondary"
-              >
-                <X size={16} strokeWidth={1.8} />
-              </button>
+        <>
+          <button
+            type="button"
+            aria-label="Close chat"
+            className="absolute inset-0 z-[39] cursor-default"
+            onClick={() => setChatOpen(false)}
+          />
+          <div className="absolute bottom-5 left-1/2 z-40 w-[480px] max-w-[92%] -translate-x-1/2">
+            {/* worker avatar sits on top of the window */}
+            <div className="relative z-10 flex justify-center">
               <button
                 type="button"
                 aria-label="Switch worker"
@@ -921,13 +909,32 @@ export function DesktopExperience() {
                   setChatOpen(false);
                   setWorkersOpen(true);
                 }}
-                className="rounded-full ring-2 ring-subtle transition-transform hover:scale-105"
+                className="rounded-full bg-raised p-1 shadow-dock transition-transform hover:scale-105"
               >
-                <Avatar w={worker} size={48} />
+                <Avatar w={worker} size={52} />
               </button>
-              <p className="mt-1.5 text-label-md font-medium text-content">{worker.name}</p>
-              <p className="text-label-xs text-content-tertiary">{worker.routine}</p>
             </div>
+
+            <div
+              className="-mt-7 flex max-h-[64vh] flex-col rounded-11 bg-raised p-3 pt-9 shadow-window"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative flex flex-col items-center pb-2">
+                <GripHorizontal
+                  size={16}
+                  className="absolute left-1 top-0 text-content-tertiary"
+                />
+                <button
+                  type="button"
+                  aria-label="Close chat"
+                  onClick={() => setChatOpen(false)}
+                  className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-fill-secondary"
+                >
+                  <X size={16} strokeWidth={1.8} />
+                </button>
+                <p className="text-label-md font-medium text-content">{worker.name}</p>
+                <p className="text-label-xs text-content-tertiary">{worker.routine}</p>
+              </div>
 
             <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto py-3">
               <p className="ml-auto max-w-[328px] rounded-10 bg-fill-secondary px-4 py-3 text-body-md text-content">
@@ -973,8 +980,9 @@ export function DesktopExperience() {
                 <Mic size={18} strokeWidth={1.8} />
               </span>
             </div>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

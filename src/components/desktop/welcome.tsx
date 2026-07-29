@@ -222,50 +222,38 @@ export function Welcome({ wallpaper }: { wallpaper: string }) {
   );
 }
 
-/* ---------- glass squircle holding the Imagine mark ---------- */
+/* ---------- the Imagine mark, set in a glass plate ---------- */
 function GlassMark() {
   return (
     <span
-      className="relative flex h-32 w-32 items-center justify-center rounded-[34px]"
+      className="relative flex items-center justify-center rounded-[36px] p-[18px]"
       style={{
-        background: "rgba(255,255,255,0.14)",
-        WebkitBackdropFilter: "blur(26px) saturate(180%)",
-        backdropFilter: "blur(26px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.4)",
+        background: "rgba(255,255,255,0.15)",
+        WebkitBackdropFilter: "blur(28px) saturate(180%)",
+        backdropFilter: "blur(28px) saturate(180%)",
+        border: "1px solid rgba(255,255,255,0.42)",
         boxShadow:
-          "inset 0 1.5px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.12), 0 24px 60px rgba(0,0,0,0.35)",
+          "inset 0 1.5px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(255,255,255,0.12), 0 28px 64px rgba(0,0,0,0.4)",
       }}
     >
-      {/* specular sweep */}
+      {/* specular sweep across the plate */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[34px]"
+        className="pointer-events-none absolute inset-0 rounded-[36px]"
         style={{
           background:
-            "linear-gradient(140deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.06) 38%, transparent 60%)",
+            "linear-gradient(140deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.07) 36%, transparent 58%)",
         }}
       />
-      <svg
-        viewBox="0 0 1200 1200"
-        className="relative h-[72px] w-[72px] text-white"
-        style={{ filter: "drop-shadow(0 2px 10px rgba(0,0,0,0.28))" }}
-        aria-hidden
-      >
-        {/* centre sparkle */}
-        <path
-          d="M600 130 Q678 466 966 600 Q678 734 600 1070 Q522 734 234 600 Q522 466 600 130Z"
-          fill="currentColor"
-        />
-        {/* S-ribbon ends sweeping off toward the corners */}
-        <path
-          d="M1168 262 Q1010 214 872 148 Q846 262 872 372 Q1020 440 1180 500 Q1184 372 1168 262Z"
-          fill="currentColor"
-        />
-        <path
-          d="M32 938 Q190 986 328 1052 Q354 938 328 828 Q180 760 20 700 Q16 828 32 938Z"
-          fill="currentColor"
-        />
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/imagine-logo.png"
+        alt="Imagine"
+        width={90}
+        height={90}
+        className="relative block h-[90px] w-[90px] rounded-[20px]"
+        style={{ boxShadow: "0 10px 28px rgba(20,10,50,0.45)" }}
+      />
     </span>
   );
 }
